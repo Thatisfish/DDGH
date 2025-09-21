@@ -33,24 +33,25 @@
 
 .bridge {
 	height: 40vh;
-	padding: 80px 60px;
 	text-align: center;
 	background: url("../images/Home/bridge.svg");
 	display: flex;
 	align-items: center;
 
 	.bridge_text {
-		max-width: 600px;
+		width: 40vw;
+		padding-left: 150px;
 
 		h2 {
-			font-size: 28px;
-			font-weight: 700;
-			color: #6E3D3D; // 深棕紅色
-			margin-bottom: 16px;
+			font-size: 36px;
+			font-weight: 900;
+			color: #7B5E57; // 深棕紅色
+			// margin-bottom: 16px;
 		}
 
 		p {
-			font-size: 16px;
+			font-size: 18px;
+			font-weight: 900;
 			color: #555;
 			line-height: 1.8;
 		}
@@ -59,39 +60,204 @@
 	.bridge_list {
 		display: flex;
 		justify-content: center;
-		gap: 24px;
-		flex-wrap: wrap;
+		gap: 60px;
+		width: 60vw;
+
+		.bridge_item.i1 {
+
+			&:hover {
+				transform: translateY(-10px);
+			}
+		}
+
+		.bridge_item.i2 {
+			position: relative; // 還在文流裡
+			transform: translateY(105px); // 視覺往下突破
+			z-index: 2; // 確保疊在 .about 上面
+
+			&:hover {
+				transform: translateY(95px);
+			}
+		}
+
+		.bridge_item.i3 {
+			position: relative; // 還在文流裡
+			transform: translateY(70px); // 視覺往下突破
+			z-index: 2; // 確保疊在 .about 上面
+
+			&:hover {
+				transform: translateY(60px);
+			}
+		}
+
+		.bridge_item {
+			border-radius: 6px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			transition: transform 0.3s ease;
+			height: 340px;
+			width: 250px;
+			border: 2px solid #CAAE81;
+			position: relative;
+
+			img {
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+
+			h3 {
+				font-size: 24px;
+				font-weight: 700;
+				color: #F5F0E6;
+				background: rgba(0, 0, 0, 0.5);
+				margin: 0;
+				padding: 12px 0;
+				position: absolute;
+				bottom: 0; // 疊在圖片下方
+				width: 100%;
+			}
+		}
 	}
 
-	.bridge_item {
-		flex: 1 1 280px;
-		max-width: 320px;
-		background: #fff;
-		border: 1px solid #ddd;
-		border-radius: 8px;
-		overflow: hidden;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-		transition: transform 0.3s ease;
+}
 
-		&:hover {
-			transform: translateY(-6px);
+.about {
+	background: #F2EFE9;
+	height: 80vh;
+}
+
+.culture {
+	height: 50vh;
+}
+
+.contact {
+	background: #F2EFE9;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	gap: 80px;
+	padding: 80px 0;
+
+	.tit {
+		font-size: 36px;
+		color: #333;
+		font-weight: 900;
+		gap: 25px;
+	}
+
+	span {
+
+		font-size: 24px;
+		font-weight: 600;
+		color: #7B5E57;
+	}
+
+	.info {
+		.tit {
+			span {
+				padding-left: 25px;
+			}
 		}
 
-		img {
-			width: 100%;
-			height: auto;
-			display: block;
+		.if {
+			.tefe {
+				display: flex;
+				gap: 20px;
+			}
+
+			font-size: 20px;
+			margin-top: 35px;
+			display: flex;
+			flex-direction: column;
+			gap: 25px;
+		}
+	}
+
+	.qa {
+		background: #F2EFE9;
+		padding: 0 clamp(24px, 4vw, 40px);
+
+		.tit {
+			font-size: clamp(20px, 3.6vw, 28px);
+			font-weight: 900;
+			color: #333;
+			letter-spacing: 2px;
+			margin: 0 0 16px;
 		}
 
-		h3 {
-			font-size: 18px;
-			font-weight: 600;
-			color: #fff;
-			background: rgba(0, 0, 0, 0.5);
-			margin: 0;
-			padding: 12px 0;
-			position: relative;
-			top: -48px; // 疊在圖片下方
+		.contact-form {
+			max-width: 720px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 16px;
+
+			.field {
+				display: grid;
+				gap: 8px;
+
+				.label {
+					font-size: 18px;
+					color: #3d3d3d;
+				}
+
+				input,
+				textarea {
+					font: inherit;
+					background: #fff;
+					border: 3px solid #D8C9A7;
+					border-radius: 4px;
+					padding: 12px 14px;
+					outline: none;
+					box-shadow: 0 2px 6px rgba(0, 0, 0, .06);
+					transition: box-shadow .2s ease, border-color .2s ease;
+
+					&::placeholder {
+						color: #bbb;
+					}
+
+					&:focus {
+						border-color: #b9975e;
+						box-shadow: 0 0 0 4px rgba(202, 174, 129, .18);
+					}
+				}
+			}
+
+			.btn-primary {
+				justify-self: center;
+				padding: 10px 22px;
+				border-radius: 12px;
+				border: 3px solid #D8C9A7;
+				background: #EDE3D1;
+				color: #5b4a2e;
+				font-size: 18px;
+				font-weight: 700;
+				letter-spacing: .2em;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+				cursor: pointer;
+				transition: transform .06s ease, filter .2s ease;
+
+				&:hover {
+					filter: brightness(0.98);
+				}
+
+				&:active {
+					transform: translateY(1px);
+				}
+			}
+		}
+
+		@media (max-width: 640px) {
+			.contact-form {
+				gap: 14px;
+
+				.field {
+					.label {
+						font-size: 15px;
+					}
+				}
+			}
 		}
 	}
 }
