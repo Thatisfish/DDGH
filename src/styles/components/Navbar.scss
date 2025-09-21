@@ -1,6 +1,8 @@
 .navbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	/* 垂直置中 */
 	padding: 15px 65px 15px 45px;
 	height: 80px;
 	background: #F2EFE9;
@@ -10,11 +12,113 @@
 		font-weight: 600;
 		display: flex;
 		gap: 20px;
+		list-style: none;
 
-		li {
-			display: flex;
-			flex-direction: column;
-			justify-content: end;
+		>li {
+			position: relative;
+			/* 給 submenu 定位 */
+			display: block;
+			/* 讓 <a> 與 submenu 同層、整塊可 hover */
+			/* 可選：padding: 0 4px; 擴大左右熱區 */
+
+			>a {
+				display: block;
+				/* 擴大可 hover 區 */
+				text-decoration: none;
+				color: #333;
+				padding: 12px 0;
+				/* 上下留白，避免斷開 */
+				transition: color .2s ease, font-weight .2s ease;
+
+				&:hover {
+					color: #A8894A;
+					/* 深一點的金色 */
+					font-weight: 700;
+				}
+			}
+
+			/* 下拉選單 */
+			>.submenu {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				min-width: 180px;
+				background: #F2EFE9;
+				/* 與頂導同系的米色底 */
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+				padding: 8px 0;
+
+				/* 透明橋樑：填補 a 與 submenu 間隙 */
+				margin-top: 0;
+				padding-top: 8px;
+
+				opacity: 0;
+				visibility: hidden;
+				transform: translateY(8px);
+				transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+				z-index: 1000;
+
+				li {
+					position: relative;
+
+					a {
+						display: flex;
+						/* 同一個 clickable 區塊 */
+						flex-direction: column;
+						/* 標題/副標上下排 */
+						align-items: flex-start;
+						padding: 8px 16px;
+						font-size: 16px;
+						color: #333;
+						transition: color .2s ease, font-weight .2s ease, background-color .2s ease;
+
+						&:hover {
+							background: #f8f8f8;
+							font-weight: 700;
+							color: #5A4632;
+						}
+
+						.subnote {
+							font-size: 13px;
+							font-weight: 700;
+							color: #A8894A;
+							/* 比 #CBB27A 再深一點 */
+							margin-top: 2px;
+							padding-left: 9px;
+
+							/* 預設隱藏 */
+							max-height: 0;
+							opacity: 0;
+							overflow: hidden;
+							transition: opacity .2s ease, max-height .2s ease;
+						}
+
+						/* hover Link 才顯示 subnote */
+						&:hover .subnote {
+							max-height: 20px;
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			/* 只要滑在 li 區域（含透明橋樑/submenu），submenu 保持開啟 */
+			&:hover>.submenu,
+			&:focus-within>.submenu {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+				transition-delay: 0s;
+			}
+
+			/* ⭐ 父層高亮同步：滑到 submenu 內時，父層 <a> 仍保持 hover 狀態 */
+			&:hover>a,
+			&:focus-within>a {
+				color: #5A4632;
+				font-weight: 700;
+			}
 		}
 	}
 }

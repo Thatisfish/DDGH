@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from "./pages/Home";
-import TCM from './pages/TCM'
+import MemberArea from './pages/MemberArea'
 
 function App() {
 	return (
@@ -10,7 +10,7 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/TCM" element={<TCM />} />
+				<Route path="/MemberArea" element={<MemberArea />} />
 			</Routes>
 			<Footer />
 		</>

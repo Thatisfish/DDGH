@@ -30,3 +30,68 @@
 		}
 	}
 }
+
+.bridge {
+	height: 40vh;
+	padding: 80px 60px;
+	text-align: center;
+	background: url("../images/Home/bridge.svg");
+	display: flex;
+	align-items: center;
+
+	.bridge_text {
+		max-width: 600px;
+
+		h2 {
+			font-size: 28px;
+			font-weight: 700;
+			color: #6E3D3D; // 深棕紅色
+			margin-bottom: 16px;
+		}
+
+		p {
+			font-size: 16px;
+			color: #555;
+			line-height: 1.8;
+		}
+	}
+
+	.bridge_list {
+		display: flex;
+		justify-content: center;
+		gap: 24px;
+		flex-wrap: wrap;
+	}
+
+	.bridge_item {
+		flex: 1 1 280px;
+		max-width: 320px;
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: translateY(-6px);
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		h3 {
+			font-size: 18px;
+			font-weight: 600;
+			color: #fff;
+			background: rgba(0, 0, 0, 0.5);
+			margin: 0;
+			padding: 12px 0;
+			position: relative;
+			top: -48px; // 疊在圖片下方
+		}
+	}
+}

@@ -18,26 +18,75 @@ footer {
 			align-items: start;
 
 			.About {
+				height: 124px;
 				display: flex;
 				flex-direction: column;
+				justify-content: space-between;
 				gap: 16px;
 			}
 
+			.service,
+			.culture {
+				a {
+					color: #333333;
+					font-weight: 600;
+				}
+			}
+
 			.service {
-				height: 123px;
 				display: flex;
 				flex-direction: column;
+				gap: 5px;
 
-				.service-list {
+				.service-body {
 					display: flex;
-					flex-direction: column;
-					justify-content: center;
+
+					.service-list {
+						margin-left: 10px;
+						display: flex;
+						flex-direction: column;
+						gap: 10px;
+					}
+				}
+			}
+
+			.culture {
+				height: 124px;
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+
+				.culture-body {
+					display: flex;
+					height: 96px;
+
+					.TC {
+						margin-left: 10px;
+						display: flex;
+						flex-direction: column;
+						gap: 5px;
+
+						li {
+							display: flex;
+							flex-direction: column;
+
+							span {
+								padding-left: 9px;
+								color: #666;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 600;
+							}
+						}
+
+
+					}
 				}
 			}
 
 			.title {
 				font-size: 18px;
-				font-weight: 500;
+				font-weight: 800;
 				color: #333333;
 			}
 		}
