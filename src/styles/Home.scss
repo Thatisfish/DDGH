@@ -45,7 +45,7 @@
 		h2 {
 			font-size: 36px;
 			font-weight: 900;
-			color: #7B5E57; // 深棕紅色
+			color: var(--main_fontc);
 			// margin-bottom: 16px;
 		}
 
@@ -122,13 +122,289 @@
 
 }
 
-.about {
-	background: #F2EFE9;
-	height: 80vh;
+.aboutDD {
+	height: 1200px;
+
+	.about {
+		height: 100%;
+		background: #F2EFE9;
+		padding: 25px 10vw;
+
+		.about_title {
+			font-size: 36px;
+			font-weight: 900;
+			color: var(--main_fontc);
+			margin-bottom: 40px;
+		}
+
+		.about_content {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			align-items: center;
+
+			.ab {
+				display: flex;
+				gap: 50px;
+				justify-content: center;
+				align-items: center;
+
+				.about_text {
+					width: 35vw;
+					text-align: center;
+					font-size: 18px; // 內文字體大小
+					line-height: 1.8; // 行距
+					color: #333; // 主色
+					font-weight: 700; // 正常粗細
+					will-change: transform, opacity;
+				}
+
+				.about_img {
+					width: 35vw;
+					height: 300px;
+					will-change: transform, opacity;
+					border: 3px solid #CAAE81;
+					border-radius: 5px;
+				}
+
+				.img_top {
+					width: 35vw;
+					height: 300px;
+					background-image: url('../images/Home/about_top.png');
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: cover;
+					/* 填滿容器 */
+				}
+
+				.img_mid {
+					width: 35vw;
+					height: 300px;
+					background-image: url('../images/Home/about_mid.png');
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: cover;
+					/* 填滿容器 */
+				}
+
+				.img_bot {
+					width: 35vw;
+					height: 300px;
+					background-image: url('../images/Home/about_bot.png');
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: cover;
+					/* 填滿容器 */
+				}
+			}
+		}
+
+		.slo {
+			margin: 56px auto 0;
+			text-align: center;
+
+			h1 {
+				font-size: clamp(22px, 3.2vw, 36px);
+				font-weight: 600; // 降低粗度
+				line-height: 1.35;
+				letter-spacing: 0.06em; // 單行再放寬字距
+				color: var(--main_fontc); // 深咖但不刺眼
+				margin: 0;
+			}
+		}
+
+	}
 }
+
 
 .culture {
 	height: 50vh;
+
+	.split-banner {
+		/* 斜線基準與當前切點 + 分隔縫（divider gap，分隔線） + 斜率（slope，斜率） + 保留比例 */
+		--cut-top0: 60%;
+		/* 基準：頂邊交點（%） */
+		--cut-bottom0: 40%;
+		/* 基準：底邊交點（%） */
+		--ct: var(--cut-top0);
+		/* 目前頂邊交點（隨 hover 變動） */
+		--cb: var(--cut-bottom0);
+		/* 目前底邊交點（隨 hover 變動） */
+		--slope: calc(var(--cut-top0) - var(--cut-bottom0));
+		/* 斜率差（維持角度用） */
+		--gap: 12px;
+		/* 中縫寬度 */
+		--keep: 4%;
+		/* hover（懸停）時保留比例（= 只覆蓋 90%） */
+
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border: 10px solid #b3a68f;
+		background: #b3a68f;
+		/* 中縫顏色同邊框 */
+		overflow: hidden;
+
+		/* ⬇️ 沿斜角推到 90%：左側 hover → 把切線推到右側 90%；右側 hover → 推到左側 10% */
+		&:has(.panel.left:hover) {
+			--ct: calc(100% - var(--keep));
+			/* 90% */
+			--cb: calc((100% - var(--keep)) - var(--slope));
+			/* 90% - 斜率差 */
+			/* 可選：推近邊緣時把中縫收細或歸零
+			   --gap: 8px; 或 --gap: 0;
+			*/
+		}
+
+		&:has(.panel.right:hover) {
+			--cb: var(--keep);
+			/* 10% */
+			--ct: calc(var(--keep) + var(--slope));
+			/* 10% + 斜率差 */
+			/* 可選：--gap: 8px; 或 --gap: 0; */
+		}
+
+		.panel {
+			position: absolute;
+			inset: 0;
+			background-repeat: no-repeat;
+			background-size: cover;
+			cursor: pointer;
+			z-index: 1;
+
+			transition:
+				clip-path .6s cubic-bezier(.25, .46, .45, .94),
+				background-position .6s cubic-bezier(.25, .46, .45, .94),
+				background-size .6s cubic-bezier(.25, .46, .45, .94);
+			will-change: clip-path, background-position, background-size;
+
+			/* hover 灰遮罩（overlay，覆蓋層） */
+			&::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: transparent;
+				transition: background .4s ease;
+				z-index: 1;
+				pointer-events: none;
+			}
+
+			/* === Label（標籤）—統一左/上 + transform 控位，避免亂飛 === */
+			.label {
+				--lx: 28px;
+				/* left 起點 */
+				--ly: 24px;
+				/* top 起點 */
+				--tx: 0;
+				/* translateX */
+				--ty: 0;
+				/* translateY */
+
+				position: absolute;
+				left: var(--lx);
+				top: var(--ly);
+				transform: translate(var(--tx), var(--ty));
+
+				z-index: 2;
+				color: #fff;
+				text-shadow: 0 2px 8px rgba(0, 0, 0, .45);
+				font-weight: 700;
+				letter-spacing: .06em;
+				white-space: nowrap;
+				font-size: clamp(22px, 2.4vw, 40px);
+				line-height: 1;
+
+				transition:
+					left .6s cubic-bezier(.25, .46, .45, .94),
+					top .6s cubic-bezier(.25, .46, .45, .94),
+					transform .6s cubic-bezier(.25, .46, .45, .94),
+					font-size .6s cubic-bezier(.25, .46, .45, .94);
+			}
+
+			/* hover：遮罩 */
+			&:hover::after {
+				background: rgba(0, 0, 0, .3);
+			}
+		}
+
+		/* 左側面板 */
+		.panel.left {
+			background: url(../images/Home/culture_left.png) center/cover;
+
+			/* 用當前切點 --ct / --cb（中縫各退 gap/2） */
+			clip-path: polygon(0 0,
+					calc(var(--ct) - var(--gap)/2) 0,
+					calc(var(--cb) - var(--gap)/2) 100%,
+					0 100%);
+			background-position: 20% 50%;
+
+			/* 初始：左上角 */
+			.label {
+				--lx: 28px;
+				--ly: 24px;
+				--tx: 0;
+				--ty: 0;
+			}
+
+			/* 視覺往右填（background 位移/放大） */
+			&:hover {
+				background-position: 38% 50%;
+				background-size: 130% auto;
+				z-index: 3;
+			}
+		}
+
+		/* 右側面板 */
+		.panel.right {
+			background: url(../images/Home/culture_right.png);
+			background-size: cover;
+
+			clip-path: polygon(calc(var(--ct) + var(--gap)/2) 0,
+					100% 0,
+					100% 100%,
+					calc(var(--cb) + var(--gap)/2) 100%);
+			background-position: 80% 50%;
+
+			/* 初始：右下角（仍用左/上 + 負位移，不用 right/bottom） */
+			.label {
+				--lx: calc(100% - 28px);
+				--ly: calc(100% - 24px);
+				--tx: -100%;
+				--ty: -100%;
+			}
+
+			/* 視覺往左填（background 位移/放大） */
+			&:hover {
+				background-position: 62% 50%;
+				background-size: 130% auto;
+				z-index: 3;
+			}
+		}
+
+		/* 置中文字（center，置中）—放在最後，層疊勝過角落設定 */
+		.panel.left:hover .label,
+		.panel.right:hover .label {
+			--lx: 50%;
+			--ly: 50%;
+			--tx: -50%;
+			--ty: -50%;
+			text-shadow: 0 6px 22px rgba(0, 0, 0, .7);
+			font-size: clamp(26px, 3vw, 48px);
+		}
+
+		/* RWD（responsive web design，自適應） */
+		@media (max-width: 768px) {
+			border-width: 5px;
+			--gap: 8px;
+		}
+
+		@media (max-width: 480px) {
+			--gap: 6px;
+			/* 若要小螢幕改上下堆疊：
+			.panel { position: relative; height: 50%; clip-path: none; }
+			*/
+		}
+	}
 }
 
 .contact {
@@ -150,7 +426,7 @@
 
 		font-size: 24px;
 		font-weight: 600;
-		color: #7B5E57;
+		color: var(--main_fontc);
 	}
 
 	.info {
@@ -167,7 +443,7 @@
 			}
 
 			font-size: 20px;
-			margin-top: 35px;
+			margin: 35px 0 20px;
 			display: flex;
 			flex-direction: column;
 			gap: 25px;
@@ -175,7 +451,6 @@
 	}
 
 	.qa {
-		background: #F2EFE9;
 		padding: 0 clamp(24px, 4vw, 40px);
 
 		.tit {
@@ -193,6 +468,16 @@
 			grid-template-columns: 1fr;
 			gap: 16px;
 
+			.is-invalid {
+				outline: 2px solid #e53935;
+			}
+
+			/* 只要欄位開始輸入就移除紅框（可選） */
+			input:valid,
+			textarea:valid {
+				outline: none;
+			}
+
 			.field {
 				display: grid;
 				gap: 8px;
@@ -205,6 +490,8 @@
 				input,
 				textarea {
 					font: inherit;
+					font-family: "Noto Sans TC", sans-serif;
+					font-weight: 300;
 					background: #fff;
 					border: 3px solid #D8C9A7;
 					border-radius: 4px;
