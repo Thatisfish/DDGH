@@ -1,13 +1,14 @@
 import React from 'react'
 import '../styles/components/Navbar.scss'
 import { Link } from 'react-router-dom'
+import Logo from '../images/logo.png'
 
 const navbar = () => {
 	return (
 		<header className='topbar'>
 			<nav className='navbar'>
 				<div className='Logo'>
-					<img src="" alt="LOGO" />
+					<img src={Logo} alt="LOGO" />
 				</div>
 				<ul className='menu'>
 					<li><Link to="/#">首頁</Link></li>
