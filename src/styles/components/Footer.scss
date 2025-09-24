@@ -33,6 +33,21 @@ footer {
 				}
 			}
 
+			.About,
+			.service,
+			.culture {
+				a {
+					&:hover {
+						color: #5A4632; // 例如你的品牌金色
+						font-weight: 700;
+
+						span {
+							color: #A8894A;
+						}
+					}
+				}
+			}
+
 			.service {
 				display: flex;
 				flex-direction: column;
