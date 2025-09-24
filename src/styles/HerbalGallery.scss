@@ -1,362 +1,566 @@
-.herbal-cabinet-container {
-	min-height: 100vh;
-	background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
-	padding: 2rem;
-	font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+/* src/styles/HerbalGallery.scss */
+.herb-gallery {
+	--wood: #8e5a3c;
+	/* 木色：偏紅棕（red-brown） */
+	--wood-dark: #5a3826;
+	/* 深木色：更深更暖 */
+	--paper: #f7f3ea;
+	/* 紙卡 */
+	--ink: #333333;
+	--gold: #cbb27a;
+	/* 金色（保留） */
+	--shadow: rgba(0, 0, 0, 0.18);
+	padding: 48px 6vw;
+	background: #F9F6F1;
 
-	.cabinet-header {
-		text-align: center;
-		margin-bottom: 3rem;
-
-		.cabinet-title {
-			font-size: 3rem;
-			color: #2F1B14;
-			margin: 0 0 1rem 0;
-			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-			font-weight: bold;
-		}
-
-		.cabinet-subtitle {
-			font-size: 1.2rem;
-			color: #5D4E37;
-			margin: 0;
-			opacity: 0.9;
-		}
+	&__title {
+		font-size: clamp(22px, 2.6vw, 36px);
+		font-weight: 800;
+		color: #4a6b4c;
+		margin: 0 0 12px;
 	}
 
-	.cabinet-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1.5rem;
-		max-width: 1200px;
-		margin: 0 auto;
+	&__hint {
+		color: #666;
+		margin: 0 0 24px;
 	}
 
-	.cabinet-drawer {
+	&__grid {
+		/* 一體木櫃背板設定 */
 		position: relative;
-		height: 150px;
-		perspective: 1000px;
-		cursor: pointer;
+		z-index: 0;
+		/* 背板在下層 */
+		padding: 12px 12px 32px;
+		/* 讓背板有內距 */
+		border-radius: 16px;
 
-		.drawer-front {
+		/* 木櫃背板（暖木色 + 細木紋） */
+		background:
+			radial-gradient(100% 100% at 0 0, rgba(255, 255, 255, .04) 0, transparent 40%),
+			repeating-linear-gradient(-8deg,
+				rgba(255, 255, 255, .05) 0px, rgba(255, 255, 255, .05) 3px,
+				rgba(0, 0, 0, .03) 3px, rgba(0, 0, 0, .03) 7px),
+			/* 主色改為紅棕暖木 */
+			linear-gradient(135deg, #b87754 0%, var(--wood) 48%, var(--wood-dark) 100%);
+		box-shadow:
+			inset 0 10px 18px rgba(0, 0, 0, .12),
+			inset 0 -10px 16px rgba(0, 0, 0, .12);
+
+		/* 底座（toe-kick） */
+		&::after {
+			content: "";
 			position: absolute;
-			top: 0;
+			left: 12px;
+			right: 12px;
+			bottom: 10px;
+			height: clamp(14px, 1.4vw, 22px);
+			border-radius: 8px;
+			background: linear-gradient(180deg, #6b5137 0%, #5a452f 60%, #3c2e20 100%);
+			box-shadow:
+				0 -2px 0 rgba(255, 255, 255, .15) inset,
+				0 4px 10px rgba(0, 0, 0, .25);
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		/* ===== Grid 欄數與 RWD ===== */
+		display: grid;
+		grid-template-columns: repeat(5, minmax(190px, 1fr));
+		gap: clamp(12px, 1.5vw, 24px);
+
+		@media (max-width: 1360px) {
+			grid-template-columns: repeat(4, minmax(190px, 1fr));
+
+			&::before {
+				background:
+					repeating-linear-gradient(to right,
+						rgba(0, 0, 0, .035) 0 2px, transparent 2px calc(25% - 0px));
+			}
+		}
+
+		@media (max-width: 1100px) {
+			grid-template-columns: repeat(3, minmax(190px, 1fr));
+
+			&::before {
+				background:
+					repeating-linear-gradient(to right,
+						rgba(0, 0, 0, .035) 0 2px, transparent 2px calc(33.333% - 0px));
+			}
+		}
+
+		@media (max-width: 820px) {
+			grid-template-columns: repeat(2, minmax(180px, 1fr));
+
+			&::before {
+				background:
+					repeating-linear-gradient(to right,
+						rgba(0, 0, 0, .035) 0 2px, transparent 2px calc(50% - 0px));
+			}
+		}
+
+		@media (max-width: 520px) {
+			grid-template-columns: 1fr;
+
+			&::before {
+				background: none;
+			}
+		}
+	}
+}
+
+/* 讓卡片顯示在背板上方 */
+.cabinet {
+	position: relative;
+	z-index: 1;
+}
+
+/* 單一「中藥櫃」 */
+.cabinet {
+	--file-rise: 72px;
+	/* 檔案浮出高度 */
+
+	position: relative;
+	aspect-ratio: 4 / 3.2;
+	border-radius: 14px;
+	box-shadow:
+		0 10px 20px var(--shadow),
+		inset 0 2px 0 rgba(255, 255, 255, 0.22),
+		inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+	padding: 10px;
+	cursor: pointer;
+	overflow: visible;
+	transition: transform .2s ease;
+	will-change: transform;
+	perspective: 800px;
+
+	/* 初始：完全正放（無旋轉/水平位移） */
+	transform: none;
+
+	/* Hover（抬升＋視差＋files 冒出） */
+	&:hover {
+		transform: translateY(-2px);
+		/* 僅微幅上移 */
+
+		.drawer {
+			transform: scale(1.15) rotateX(0.5deg);
+			z-index: 2;
+			box-shadow:
+				inset 0 8px 18px rgba(0, 0, 0, .18),
+				inset 0 -10px 16px rgba(0, 0, 0, .22),
+				0px 12px 24px rgba(0, 0, 0, 0.7);
+		}
+
+		.drawer__front {
+			transform: translateY(-50%) translateZ(8px);
+		}
+
+		.drawer__files {
+			display: block;
+			height: var(--file-rise);
+			top: calc(-1 * (var(--file-rise) + 2px));
+			opacity: 1;
+		}
+	}
+
+	/* 鍵盤可近用：focus 等同 hover */
+	&:focus-visible,
+	&:focus {
+		transform: translateY(-2px);
+
+		.drawer {
+			transform: scale(1.15) rotateX(0.5deg);
+			z-index: 2;
+			box-shadow:
+				inset 0 8px 18px rgba(0, 0, 0, .18),
+				inset 0 -10px 16px rgba(0, 0, 0, .22),
+				0px 12px 24px rgba(0, 0, 0, 0.7);
+		}
+
+		.drawer__front {
+			transform: translateY(-50%) translateZ(8px);
+		}
+
+		.drawer__files {
+			display: block;
+			height: var(--file-rise);
+			top: calc(-1 * (var(--file-rise) + 2px));
+			opacity: 1;
+		}
+	}
+
+	/* === 抽屜：全木紋（無金屬） === */
+	.drawer {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		border-radius: 10px;
+		border: 2px solid rgba(73, 52, 33, .55);
+		background:
+			repeating-linear-gradient(var(--grain-angle, -8deg),
+				rgba(255, 255, 255, .06) 0px,
+				rgba(255, 255, 255, .06) 3px,
+				rgba(0, 0, 0, .03) 3px,
+				rgba(0, 0, 0, .03) 7px),
+			/* 主木色改暖紅棕，深處接 --wood-dark */
+			linear-gradient(135deg, #b67954 0%, #8d5e40 48%, var(--wood-dark) 100%);
+		background-blend-mode: soft-light, normal;
+		box-shadow:
+			inset 0 8px 18px rgba(0, 0, 0, .18),
+			inset 0 -10px 16px rgba(0, 0, 0, .22),
+			0 0 0 rgba(0, 0, 0, 0);
+		transition: transform 1s, box-shadow 1s, background-position 1s;
+		z-index: 1;
+		transform-origin: center bottom;
+
+		/* 正面：置中標籤＋木頭圓鈕 */
+		&__front {
+			position: relative;
+			width: 84px;
+			margin: 0 auto;
+			top: 50%;
+			transform: translateY(-50%);
+			transition: transform .2s ease;
+		}
+
+		&__label {
+			display: block;
+			width: 80%;
+			height: 32px;
+			margin: 0 auto 18px auto;
+			border-radius: 6px;
+			background: linear-gradient(180deg, #f7f1e2, #eadfca);
+			border: 2px solid #7a5a39;
+			box-shadow:
+				inset 0 1px 0 rgba(255, 255, 255, .8),
+				0 4px 8px rgba(0, 0, 0, .18);
+
+			&-text {
+				display: block;
+				width: 100%;
+				height: 100%;
+				font-weight: 800;
+				text-align: center;
+				line-height: 30px;
+				color: #5a4632;
+				letter-spacing: .06em;
+				text-shadow: 0 1px 0 #fff;
+				white-space: pre-line;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				padding: 0 6px;
+			}
+		}
+
+		&__handle {
+			position: relative;
+			margin: 0 auto;
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			background:
+				radial-gradient(circle at 40% 38%, #d7af7a 0%, #c29461 45%, #8b6742 70%, #5e462f 100%);
+			box-shadow:
+				inset 0 2px 3px rgba(255, 255, 255, .18),
+				inset 0 -2px 3px rgba(0, 0, 0, .25),
+				0 2px 6px rgba(0, 0, 0, .35);
+		}
+
+		&__files {
+			position: absolute;
+			background-color: var(--paper);
+			width: 95%;
+			height: 0;
 			left: 0;
 			right: 0;
-			bottom: 0;
-			background: linear-gradient(145deg, #8B4513, #A0522D);
-			border: 3px solid #654321;
-			border-radius: 8px;
-			box-shadow:
-				0 4px 8px rgba(0, 0, 0, 0.3),
-				inset 0 2px 4px rgba(255, 255, 255, 0.1);
-			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			top: -2px;
+			margin: auto;
+			border-top-left-radius: 6px;
+			border-top-right-radius: 6px;
+			box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.2);
+			transition: height 1s, top 1s, opacity .3s;
+			overflow: hidden;
+			opacity: 0;
 			display: flex;
-			align-items: center;
-			justify-content: center;
 			flex-direction: column;
 
-			.drawer-handle {
-				width: 60px;
-				height: 8px;
-				background: linear-gradient(145deg, #DAA520, #B8860B);
-				border-radius: 20px;
-				margin-bottom: 1rem;
-				box-shadow:
-					0 2px 4px rgba(0, 0, 0, 0.3),
-					inset 0 1px 2px rgba(255, 255, 255, 0.3);
-			}
-
-			.drawer-number {
-				font-size: 1.5rem;
-				font-weight: bold;
-				color: #DAA520;
-				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-			}
-		}
-
-		.drawer-content {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: linear-gradient(145deg, #F5DEB3, #DEB887);
-			border: 3px solid #CD853F;
-			border-radius: 8px;
-			transform: translateX(100%);
-			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			overflow: hidden;
-			box-shadow:
-				0 4px 8px rgba(0, 0, 0, 0.2),
-				inset 0 2px 4px rgba(255, 255, 255, 0.3);
-
-			.herb-card {
+			&-image {
+				width: 100%;
 				height: 100%;
+				object-fit: cover;
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+			}
+
+			&-info {
+				padding: 8px 12px 12px;
+				background: var(--paper);
+				flex: 1;
 				display: flex;
 				flex-direction: column;
-				align-items: center;
 				justify-content: center;
-				padding: 1rem;
-				background: rgba(255, 255, 255, 0.1);
-				backdrop-filter: blur(10px);
-				cursor: pointer;
-				transition: all 0.3s ease;
-				position: relative;
-				overflow: hidden;
-
-				&::before {
-					content: '';
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					background: linear-gradient(45deg,
-							rgba(255, 255, 255, 0.1) 0%,
-							rgba(255, 255, 255, 0.05) 50%,
-							rgba(255, 255, 255, 0.1) 100%);
-					opacity: 0;
-					transition: opacity 0.3s ease;
-				}
-
-				&:hover::before {
-					opacity: 1;
-				}
-
-				.herb-icon {
-					font-size: 2.5rem;
-					margin-bottom: 0.5rem;
-					filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-					transition: transform 0.3s ease;
-				}
-
-				.herb-name-zh {
-					font-size: 1.3rem;
-					font-weight: bold;
-					color: #2F1B14;
-					margin-bottom: 0.2rem;
-					text-align: center;
-					text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-				}
-
-				.herb-name-en {
-					font-size: 0.9rem;
-					color: #5D4E37;
-					text-align: center;
-					opacity: 0.8;
-					font-style: italic;
-				}
-
-				&:hover {
-					transform: translateY(-5px);
-
-					.herb-icon {
-						transform: scale(1.1) rotate(5deg);
-					}
-				}
 			}
+
+			&-title {
+				font-size: 14px;
+				font-weight: 700;
+				color: var(--ink);
+				margin: 0 0 4px;
+				line-height: 1.2;
+				text-align: center;
+			}
+
+			&-latin {
+				font-size: 11px;
+				color: #666;
+				font-style: italic;
+				margin: 0;
+				line-height: 1.3;
+				text-align: center;
+			}
+
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				top: -10px;
+				height: 10px;
+				width: 50%;
+				box-shadow: -1px -2px 5px rgba(0, 0, 0, 0.2);
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+			}
+
+			&::before {
+				left: 0;
+				background-color: var(--paper);
+			}
+
+			&::after {
+				right: 0;
+				background-color: #e7dcc5;
+			}
+		}
+	}
+
+	/* 只保留木紋角度隨機（框體不傾斜） */
+	&:nth-child(3n + 1) {
+		.drawer {
+			--grain-angle: 12deg;
+		}
+	}
+
+	&:nth-child(3n + 2) {
+		.drawer {
+			--grain-angle: 113deg;
+		}
+	}
+
+	&:nth-child(3n + 3) {
+		.drawer {
+			--grain-angle: -35deg;
+		}
+	}
+
+	&:nth-child(3n + 4) {
+		.drawer {
+			--grain-angle: 60deg;
+		}
+	}
+
+	&:nth-child(3n + 5) {
+		.drawer {
+			--grain-angle: -45deg;
+		}
+	}
+
+	&:nth-child(3n + 6) {
+		.drawer {
+			--grain-angle: 144deg;
+		}
+	}
+}
+
+/* 缺槽（missing slot）— 棕黑色空腔 */
+.cabinet--missing {
+	pointer-events: none;
+	transform: none !important;
+
+	/* 可調色：想再暖/再暗，改這三個變數即可 */
+	--cavity-top: #5a4431;
+	/* 上緣棕 */
+	--cavity-mid: #3f301f;
+	/* 中段棕黑 */
+	--cavity-bottom: #2b2117;
+	/* 底部深棕黑 */
+
+	/* 外框陰影與一般卡片一致 */
+	box-shadow:
+		0 10px 20px var(--shadow),
+		inset 0 2px 0 rgba(255, 255, 255, 0.18),
+		inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+
+	.drawer__front {
+		display: none !important;
+	}
+
+	.drawer {
+		position: relative;
+		border: 2px solid rgba(73, 52, 33, .55);
+		border-radius: 10px;
+
+		background:
+			radial-gradient(80% 120% at 50% 10%, rgba(0, 0, 0, .22), transparent 60%),
+			linear-gradient(180deg, var(--cavity-top) 0%, var(--cavity-mid) 55%, var(--cavity-bottom) 100%),
+			linear-gradient(0deg, rgba(98, 72, 44, .10), rgba(98, 72, 44, .06));
+		box-shadow:
+			inset 0 14px 22px rgba(48, 35, 22, .42),
+			inset 0 -14px 22px rgba(48, 35, 22, .38),
+			inset 12px 0 18px rgba(48, 35, 22, .28),
+			inset -12px 0 18px rgba(48, 35, 22, .28);
+
+		&__files {
+			display: none !important;
+		}
+	}
+
+	&:hover,
+	&:focus,
+	&:focus-visible {
+		transform: none !important;
+
+		.drawer {
+			transform: none !important;
+		}
+	}
+}
+
+/* Modal（對話框） */
+.herb-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+
+	&__backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, .45);
+		backdrop-filter: blur(2px);
+	}
+
+	&__panel {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: min(920px, 92vw);
+		max-height: min(80vh, 900px);
+		background: #fff;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+		display: grid;
+		grid-template-rows: auto 1fr;
+	}
+
+	&__close {
+		position: absolute;
+		top: 8px;
+		right: 10px;
+		width: 40px;
+		height: 40px;
+		border: none;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, .9);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+		font-size: 22px;
+		cursor: pointer;
+
+		&:focus-visible {
+			outline: 3px solid var(--gold);
+		}
+	}
+
+	&__cover {
+		width: 100%;
+		height: clamp(180px, 36vh, 360px);
+		object-fit: cover;
+	}
+
+	&__body {
+		padding: 18px 22px 24px;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #cfcfcf;
+			border-radius: 10px;
+		}
+	}
+
+	&__title {
+		font-size: clamp(22px, 2.2vw, 28px);
+		font-weight: 900;
+		margin: 0 0 4px;
+		color: #333;
+	}
+
+	&__latin {
+		margin: 0 0 12px;
+		color: #777;
+		font-style: italic;
+	}
+
+	&__meta {
+		margin: 0 12px 12px 0;
+		padding: 0 0 0 18px;
+
+		>li {
+			margin: 6px 0;
+			line-height: 1.5;
+
+			>strong {
+				font-weight: 800;
+				margin-right: 6px;
+				color: #2f2f2f;
+			}
+		}
+	}
+
+	/* 新欄位：notes / footnote（保留舊的 desc 支援） */
+	&__notes,
+	&__desc {
+		color: #444;
+		line-height: 1.7;
+		margin: 6px 0 0;
+	}
+
+	&__footnote {
+		margin: 14px 0 0;
+		padding-top: 10px;
+		border-top: 1px dashed #e5e1d6;
+		font-size: 12.5px;
+		line-height: 1.6;
+		color: #666;
+	}
+}
+
+/* 減少動作偏好 */
+@media (prefers-reduced-motion: reduce) {
+	.cabinet {
+		transition: none;
+		transform: rotate(0);
+
+		.drawer {
+			transition: none;
+			transform: none;
 		}
 
 		&:hover {
-			.drawer-front {
-				transform: translateX(-100%);
-				opacity: 0.7;
-			}
-
-			.drawer-content {
-				transform: translateX(0);
-			}
-		}
-	}
-
-	// Modal 樣式
-	.modal-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, 0.8);
-		backdrop-filter: blur(5px);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1000;
-		animation: fadeIn 0.3s ease;
-	}
-
-	.modal-content {
-		background: linear-gradient(145deg, #FFF8DC, #F5DEB3);
-		border-radius: 16px;
-		padding: 2rem;
-		max-width: 500px;
-		width: 90%;
-		max-height: 80vh;
-		overflow-y: auto;
-		position: relative;
-		box-shadow:
-			0 20px 40px rgba(0, 0, 0, 0.3),
-			0 8px 16px rgba(0, 0, 0, 0.2);
-		border: 3px solid #CD853F;
-		animation: slideUp 0.3s ease;
-
-		.modal-close {
-			position: absolute;
-			top: 1rem;
-			right: 1rem;
-			background: rgba(255, 255, 255, 0.2);
-			border: none;
-			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			backdrop-filter: blur(10px);
-
-			&:hover {
-				background: rgba(255, 255, 255, 0.3);
-				transform: scale(1.1);
-			}
-		}
-
-		.modal-header {
-			display: flex;
-			align-items: center;
-			margin-bottom: 2rem;
-			padding-bottom: 1rem;
-			border-bottom: 2px solid #CD853F;
-
-			.modal-icon {
-				font-size: 4rem;
-				margin-right: 1rem;
-				filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-			}
-
-			.modal-titles {
-				.modal-name-zh {
-					font-size: 2rem;
-					color: #2F1B14;
-					margin: 0 0 0.5rem 0;
-					font-weight: bold;
-					text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-				}
-
-				.modal-name-en {
-					font-size: 1.2rem;
-					color: #5D4E37;
-					margin: 0;
-					font-style: italic;
-					opacity: 0.8;
-				}
-			}
-		}
-
-		.modal-body {
-			.herb-detail {
-				margin-bottom: 1.5rem;
-				padding: 1rem;
-				background: rgba(255, 255, 255, 0.3);
-				border-radius: 8px;
-				border-left: 4px solid #CD853F;
-
-				h4 {
-					font-size: 1.2rem;
-					color: #2F1B14;
-					margin: 0 0 0.5rem 0;
-					font-weight: bold;
-				}
-
-				p {
-					font-size: 1rem;
-					color: #5D4E37;
-					line-height: 1.6;
-					margin: 0;
-				}
-			}
-		}
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-
-		to {
-			opacity: 1;
-		}
-	}
-
-	@keyframes slideUp {
-		from {
-			opacity: 0;
-			transform: translateY(50px) scale(0.95);
-		}
-
-		to {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	// 響應式設計
-	@media (max-width: 768px) {
-		padding: 1rem;
-
-		.cabinet-header {
-			margin-bottom: 2rem;
-
-			.cabinet-title {
-				font-size: 2rem;
-			}
-
-			.cabinet-subtitle {
-				font-size: 1rem;
-			}
-		}
-
-		.cabinet-grid {
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: 1rem;
-		}
-
-		.cabinet-drawer {
-			height: 120px;
-
-			.drawer-front .drawer-number {
-				font-size: 1.2rem;
-			}
-
-			.drawer-content .herb-card {
-				.herb-icon {
-					font-size: 2rem;
-				}
-
-				.herb-name-zh {
-					font-size: 1.1rem;
-				}
-
-				.herb-name-en {
-					font-size: 0.8rem;
-				}
-			}
-		}
-
-		.modal-content {
-			padding: 1.5rem;
-			margin: 1rem;
-
-			.modal-header {
-				flex-direction: column;
-				text-align: center;
-
-				.modal-icon {
-					margin: 0 0 1rem 0;
-				}
-			}
+			transform: translateY(0) rotate(0);
 		}
 	}
 }
