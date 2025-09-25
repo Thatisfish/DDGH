@@ -25,22 +25,22 @@ function HerbModal({ open, onClose, herb, footnote }) {
 					<ul className="herb-modal__meta">
 						{taste && (
 							<li>
-								<strong>性味 (Flavor & Nature)：</strong> {taste}
+								<strong>性味：</strong> {taste}
 							</li>
 						)}
 						{meridian && (
 							<li>
-								<strong>歸經 (Meridian — 傳統分類)：</strong> {meridian}
+								<strong>歸經：</strong> {meridian}
 							</li>
 						)}
 						{seen && (
 							<li>
-								<strong>在哪裡看過 (Where you see it)：</strong> {seen}
+								<strong>在哪裡看過：</strong> {seen}
 							</li>
 						)}
 						{form && (
 							<li>
-								<strong>形態 (Form)：</strong> {form}
+								<strong>形態：</strong> {form}
 							</li>
 						)}
 					</ul>
@@ -57,6 +57,7 @@ function HerbModal({ open, onClose, herb, footnote }) {
 
 function HerbCabinet({ herb, onClick }) {
 	return (
+
 		<div
 			className="cabinet"
 			onClick={() => onClick(herb)}
@@ -124,15 +125,24 @@ export default function HerbGallery() {
 	})
 
 	return (
-		<section className="herb-gallery">
-			<h2 className="herb-gallery__title">本草藥閣（Herbal Cabinet）</h2>
-			<p className="herb-gallery__hint">移動滑鼠抽屜會放大並露出文件；點擊查看詳情。</p>
+		<>
+			<section className="herb">
+				<div className="herb__hero">
+					<div className="herb__hero-inner">
+						<h1 className="herb__title">本草藥閣</h1>
+						<p className="herb__subtitle">生活裡的另一種視角｜探索身邊熟悉卻陌生的中藥材</p>
+					</div>
+				</div>
+			</section>
+			<section className="herb-gallery">
+				<p className="herb-gallery__hint">輕輕移動滑鼠，可以發現藥材的小秘密喔！</p>
 
-			<div className="herb-gallery__grid" ref={wrapRef}>
-				{items}
-			</div>
+				<div className="herb-gallery__grid" ref={wrapRef}>
+					{items}
+				</div>
 
-			<HerbModal open={open} herb={active} onClose={handleClose} footnote={HERB_FOOTNOTE} />
-		</section>
+				<HerbModal open={open} herb={active} onClose={handleClose} footnote={HERB_FOOTNOTE} />
+			</section>
+		</>
 	)
 }

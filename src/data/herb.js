@@ -504,6 +504,18 @@ export const HERBS = [
 		seen: '中藥材老字號常見',
 		form: '條狀、段',
 		notes: '苦味著名，色金黃至棕黃。'
+	},
+	{
+		id: 'zhebei',
+		name: '浙貝母',
+		latin: 'Fritillaria thunbergii',
+		aka: '浙貝',
+		image: 'https://picsum.photos/seed/zhebei/800/500',
+		taste: '苦、寒',
+		meridian: '肺、心（傳統分類）',
+		seen: '止咳藥材、藥膳',
+		form: '塊、片',
+		notes: '外觀多為扁球形或片狀，色白微黃，性寒味苦。'
 	}
 ]
 

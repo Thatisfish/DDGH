@@ -1,0 +1,39 @@
+.dashboard {
+	background: #F9F6F1;
+	height: calc(100vh - 308px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 250px;
+		height: 250px;
+		background: #F2EFE9;
+		border: 2px solid #4a6b4c;
+		border-radius: 12px;
+		text-decoration: none;
+		color: #333;
+		font-weight: 600;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: #4a6b4c;
+			color: #fff;
+		}
+	}
+
+	&__icon {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 12px;
+	}
+
+	&__label {
+		font-size: 24px;
+	}
+}

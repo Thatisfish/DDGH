@@ -1,0 +1,348 @@
+.ser {
+	/* tokens（設計代幣） */
+	--paper: #F2EFE9;
+	--ink: #333333;
+	--green: #4A6B4C;
+	--gold: #CBB27A;
+	--shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+	background: var(--paper);
+	color: var(--ink);
+
+	/* Hero */
+	&__hero {
+		position: relative;
+		min-height: clamp(280px, 40vw, 440px);
+		background: #ccc center/cover no-repeat;
+
+		&-mask {
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(60% 60% at 50% 40%, rgba(0, 0, 0, .0) 0%, rgba(0, 0, 0, .35) 100%);
+		}
+
+		&-text {
+			position: relative;
+			z-index: 1;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding-top: 50px;
+			color: #fff;
+
+			.ser__title {
+				font-size: clamp(28px, 4.5vw, 48px);
+				font-weight: 900;
+				letter-spacing: 1px;
+				text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+			}
+
+			.ser__subtitle {
+				margin-top: 10px;
+				font-size: clamp(14px, 2vw, 18px);
+				opacity: .95;
+				background: linear-gradient(90deg,
+						rgba(123, 94, 87, 0) 0%,
+						rgba(123, 94, 87, 0.75) 10%,
+						rgba(123, 94, 87, 0.75) 90%,
+						rgba(123, 94, 87, 0) 100%);
+				width: 350px;
+				text-align: center;
+			}
+		}
+	}
+
+	/* Intro block */
+	&__intro {
+		max-width: 1120px;
+		margin: 40px auto;
+		padding: 0 6vw;
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: clamp(18px, 3vw, 40px);
+		align-items: center;
+
+		&-figure {
+			position: relative;
+			aspect-ratio: 4/3;
+
+			.ser__frame {
+				position: absolute;
+				inset: 0;
+				border: 10px solid var(--gold);
+				border-radius: 18px;
+				opacity: .35;
+				filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .12));
+			}
+
+			.ser__photo {
+				position: absolute;
+				inset: 12px;
+				border-radius: 14px;
+				background: #ddd center/cover no-repeat;
+			}
+		}
+
+		&-body {
+			h2 {
+				font-size: clamp(20px, 3vw, 28px);
+				color: var(--green);
+				margin: 0 0 10px;
+				font-weight: 800;
+			}
+
+			p {
+				margin: 0 0 14px;
+				font-weight: 500;
+				line-height: 1.75;
+			}
+
+			.ser__bullets {
+				margin: 18px 0 0;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 14px;
+
+				li {
+					padding: 12px 14px;
+					background: #fff;
+					border: 1px solid rgba(0, 0, 0, .06);
+					border-radius: 12px;
+					box-shadow: var(--shadow);
+
+					h3 {
+						margin: 0 0 6px;
+						font-size: 18px;
+						font-weight: 900;
+						color: var(--green);
+					}
+
+					p {
+						margin: 0;
+						font-size: 16px;
+						font-weight: 600;
+						color: #444;
+					}
+				}
+			}
+		}
+	}
+
+	/* Steps */
+	&__steps {
+		max-width: 1120px;
+		margin: 24px auto 36px;
+		padding: 0 6vw;
+
+		h2 {
+			color: var(--green);
+			font-weight: 800;
+			font-size: 28px;
+			margin-bottom: 12px;
+		}
+
+		.steps {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: clamp(14px, 2.4vw, 24px);
+
+			&__item {
+				display: grid;
+				grid-template-columns: 48px 1fr;
+				align-items: start;
+				padding: 14px;
+				background: #fff;
+				border-radius: 12px;
+				border: 1px solid rgba(0, 0, 0, .06);
+				box-shadow: var(--shadow);
+			}
+
+			&__num {
+				width: 48px;
+				height: 48px;
+				border-radius: 12px;
+				background: var(--green);
+				color: #fff;
+				display: grid;
+				place-items: center;
+				font-weight: 800;
+				font-size: 18px;
+			}
+
+			&__content {
+				padding-left: 12px;
+
+				h4 {
+					margin: 2px 0 6px;
+					font-size: 18px;
+					font-weight: 900;
+					color: var(--green);
+				}
+
+				p {
+					margin: 0;
+					font-size: 16px;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	/* FAQ */
+	&__faq {
+		max-width: 1120px;
+		margin: 8px auto 24px;
+		padding: 0 6vw;
+
+		h2 {
+			color: var(--green);
+			font-weight: 800;
+			font-size: 28px;
+			margin-bottom: 10px;
+		}
+
+		/* ✅ 用多欄佈局，避免同列被撐高 */
+		.faq {
+			column-count: 2;
+			/* 兩欄 */
+			column-gap: 12px;
+			/* 欄間距 */
+
+			&__item {
+				display: block;
+				/* 在多欄中要是區塊元素 */
+				break-inside: avoid;
+				/* 避免被切到兩欄 */
+				margin: 0 0 12px;
+				/* 卡片縫隙改用 margin */
+				padding: 12px 14px;
+				background: #fff;
+				border-radius: 10px;
+				border: 1px solid rgba(0, 0, 0, .06);
+
+				summary {
+					cursor: pointer;
+					font-weight: 700;
+					color: #222;
+					outline: none;
+					list-style: none;
+
+					&::-webkit-details-marker {
+						display: none;
+					}
+
+					/* 可選：可見焦點（focus，聚焦）樣式 */
+					&:focus-visible {
+						box-shadow: 0 0 0 2px rgba(76, 132, 88, .35);
+						border-radius: 6px;
+					}
+				}
+
+				p {
+					margin: 8px 0 0;
+					color: #444;
+					line-height: 1.7;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 900px) {
+		&__faq {
+			.faq {
+				column-count: 1;
+				column-gap: 0;
+			}
+		}
+	}
+
+	/* CTA */
+	&__cta {
+		margin: 36px auto 0;
+		max-width: 880px;
+		padding-bottom: 64px; // 外層只負責寬度與置中，不加內距
+		text-align: center;
+
+		.sc {
+			padding: 24px 20px;
+			background: linear-gradient(180deg, rgba(202, 189, 145, .25), rgba(202, 189, 145, .15));
+			border: 1px solid rgba(0, 0, 0, .06);
+			border-radius: 16px;
+
+			h3 {
+				font-weight: 700;
+				margin: 0 0 8px;
+			}
+
+			p {
+
+				font-weight: 700;
+				margin: 0 0 14px;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 10px 18px;
+				border-radius: 999px;
+				text-decoration: none;
+				font-weight: 700;
+
+				&--primary {
+					background: var(--green);
+					color: #fff;
+					border: 2px solid var(--green);
+					transition: transform .15s ease, filter .2s ease;
+
+					&:hover {
+						transform: translateY(-1px);
+						filter: brightness(1.05);
+					}
+				}
+			}
+		}
+	}
+
+	/* RWD */
+	@media (max-width: 900px) {
+		&__intro {
+			grid-template-columns: 1fr;
+
+			&-figure {
+				order: 1;
+			}
+
+			&-body {
+				order: 2;
+			}
+
+			&-body .ser__bullets {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		&__steps .steps {
+			grid-template-columns: 1fr;
+		}
+
+		&__faq .faq {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		&__hero {
+			min-height: 260px;
+		}
+
+		&__intro {
+			margin: 28px auto;
+		}
+
+		&__cta {
+			margin-bottom: 40px;
+		}
+	}
+}

@@ -14,7 +14,9 @@
 	.menu {
 		font-size: 18px;
 		font-weight: 600;
+		color: #333;
 		display: flex;
+		align-items: center;
 		gap: 20px;
 		list-style: none;
 
@@ -23,9 +25,9 @@
 			/* 給 submenu 定位 */
 			display: block;
 			/* 讓 <a> 與 submenu 同層、整塊可 hover */
-			/* 可選：padding: 0 4px; 擴大左右熱區 */
 
-			>a {
+			>a,
+			>p {
 				display: block;
 				/* 擴大可 hover 區 */
 				text-decoration: none;
@@ -33,12 +35,8 @@
 				padding: 12px 0;
 				/* 上下留白，避免斷開 */
 				transition: color .2s ease, font-weight .2s ease;
-
-				&:hover {
-					color: #A8894A;
-					/* 深一點的金色 */
-					font-weight: 700;
-				}
+				cursor: pointer;
+				/* p 可點擊的視覺回饋 */
 			}
 
 			/* 下拉選單 */
@@ -67,7 +65,8 @@
 				li {
 					position: relative;
 
-					a {
+					a,
+					p {
 						display: flex;
 						/* 同一個 clickable 區塊 */
 						flex-direction: column;
@@ -78,7 +77,8 @@
 						color: #333;
 						transition: color .2s ease, font-weight .2s ease, background-color .2s ease;
 
-						&:hover {
+						&:hover,
+						&:focus {
 							background: #f8f8f8;
 							font-weight: 700;
 							color: #5A4632;
@@ -100,7 +100,8 @@
 						}
 
 						/* hover Link 才顯示 subnote */
-						&:hover .subnote {
+						&:hover .subnote,
+						&:focus .subnote {
 							max-height: 20px;
 							opacity: 1;
 						}
@@ -108,20 +109,74 @@
 				}
 			}
 
-			/* 只要滑在 li 區域（含透明橋樑/submenu），submenu 保持開啟 */
-			&:hover>.submenu,
-			&:focus-within>.submenu {
+			/* 只在桌面滑鼠環境用 hover 展開，避免點擊後殘留 */
+			@media (hover: hover) and (pointer: fine) {
+				&:hover>.submenu {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0);
+					transition-delay: 0s;
+				}
+
+				/* 父層高亮同步（hover 狀態） */
+				&:hover>a,
+				&:hover>p {
+					color: #5A4632;
+					font-weight: 700;
+				}
+			}
+
+			/* 點擊/觸控開合（由 React 加上 .open） */
+			&.open>.submenu {
 				opacity: 1;
 				visibility: visible;
 				transform: translateY(0);
 				transition-delay: 0s;
 			}
 
-			/* ⭐ 父層高亮同步：滑到 submenu 內時，父層 <a> 仍保持 hover 狀態 */
-			&:hover>a,
-			&:focus-within>a {
+			&.open>a,
+			&.open>p {
 				color: #5A4632;
 				font-weight: 700;
+			}
+
+			/* =========================
+			   ✅ 長亮（active（啟用中））
+			   ========================= */
+
+			/* 頂層 NavLink 自己是當前頁 */
+			>a.active,
+			>a[aria-current="page"] {
+				font-weight: 700;
+				color: #5A4632;
+			}
+
+			/* 子選單 NavLink 是當前頁 */
+			.submenu a.active,
+			.submenu a[aria-current="page"] {
+				font-weight: 700;
+				color: #5A4632;
+			}
+
+			/* React 於父層 li 加上的 is-active（群組長亮） */
+			&.is-active>a,
+			&.is-active>p {
+				font-weight: 700;
+				color: #5A4632;
+			}
+
+			/* 有支援 :has() 時，子項 active 也自動讓父層長亮（免 JS） */
+			@supports selector(:has(*)) {
+
+				&:has(.submenu a.active),
+				&:has(.submenu a[aria-current="page"]) {
+
+					>a,
+					>p {
+						font-weight: 700;
+						color: #5A4632;
+					}
+				}
 			}
 		}
 	}

@@ -1,0 +1,221 @@
+.member {
+	/* 版面與背景 */
+	background: #F9F6F1;
+	/* 桌機：扣掉 Navbar + Footer 的總高（你給的 308px） */
+	height: calc(100vh - 308px);
+
+	/* 置中 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	/* 行動版瀏覽器的 100vh 修正（viewport 動態高 100dvh） */
+	@supports (height: 100dvh) {
+		height: calc(100dvh - 308px);
+	}
+
+	/* 內層登入卡片 */
+	.login {
+		width: min(92vw, 420px);
+
+		&__box {
+			background: #fff;
+			padding: 28px;
+			border-radius: 12px;
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+			text-align: center;
+
+			.error {
+				color: #c62828;
+				font-size: 14px;
+				font-weight: 600;
+				margin: 8px 0;
+				text-align: left;
+			}
+
+			h2 {
+				font-size: 24px;
+				font-weight: 800;
+				color: #4A6B4C;
+				margin-bottom: 20px;
+				letter-spacing: 0.02em;
+			}
+
+			.form__group {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
+				text-align: left;
+				margin-bottom: 14px;
+
+				label {
+					font-size: 16px;
+					color: #333;
+					font-weight: 700;
+				}
+
+				input {
+					padding: 10px 12px;
+					border: 1px solid rgba(0, 0, 0, 0.16);
+					border-radius: 8px;
+					font-size: 14px;
+					background: #fff;
+					transition: border-color .15s ease, box-shadow .15s ease;
+
+					&::placeholder {
+						color: #9b9b9b;
+					}
+
+					&:focus {
+						outline: none;
+						border-color: #4A6B4C;
+						box-shadow: 0 0 0 3px rgba(74, 107, 76, 0.18);
+					}
+				}
+			}
+
+			.btn {
+				display: inline-block;
+				width: 100%;
+				padding: 12px;
+				border: none;
+				border-radius: 8px;
+				background: #4A6B4C;
+				color: #fff;
+				font-weight: 800;
+				font-size: 15px;
+				cursor: pointer;
+				transition: transform .06s ease, background .2s ease;
+
+				&:hover {
+					background: #3a5c40;
+				}
+
+				&:active {
+					transform: translateY(1px);
+				}
+			}
+		}
+
+		&__footer {
+			margin-top: 14px;
+
+			.link {
+				background: none;
+				border: none;
+				color: #666;
+				font-size: 14px;
+				text-decoration: underline;
+				cursor: pointer;
+				padding: 4px 6px;
+				border-radius: 6px;
+				transition: background .15s ease, color .15s ease;
+
+				&:hover {
+					color: #4A6B4C;
+					background: rgba(74, 107, 76, 0.08);
+				}
+			}
+		}
+	}
+
+	/* 彈出視窗 */
+	.modal {
+		// font-family: "Noto Sans TC", sans-serif;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+
+		&__overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.4);
+		}
+
+		&__content {
+			position: relative;
+			background: #fff;
+			padding: 24px;
+			border-radius: 12px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+			z-index: 1001;
+			text-align: center;
+			width: min(90%, 360px);
+
+			h3 {
+				font-size: 20px;
+				margin-bottom: 12px;
+				color: #4A6B4C;
+				font-weight: 800;
+			}
+
+			p {
+				font-size: 16px;
+				color: #333;
+				margin-bottom: 20px;
+				font-weight: 500;
+			}
+		}
+
+		&__actions {
+			display: flex;
+			justify-content: center;
+			gap: 12px;
+
+			button {
+				padding: 8px 16px;
+				border: none;
+				border-radius: 6px;
+				font-size: 14px;
+				cursor: pointer;
+				transition: background 0.2s;
+
+				&:first-child {
+
+					background: #4A6B4C;
+					color: #fff;
+					font-weight: 700;
+
+					&:hover {
+						background: #395a3d;
+					}
+				}
+
+				&:last-child {
+					background: #ccc;
+					color: #222;
+
+					&:hover {
+						background: #b3b3b3;
+					}
+				}
+			}
+		}
+	}
+
+	/* RWD 微調 */
+	@media (max-width: 480px) {
+		.login {
+			&__box {
+				padding: 22px;
+
+				h2 {
+					font-size: 20px;
+				}
+
+				.btn {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}

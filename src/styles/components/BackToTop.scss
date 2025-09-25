@@ -1,0 +1,61 @@
+.backtotop {
+	position: fixed;
+	z-index: 1400;
+	inset-inline-end: 20px; // 也會被 inline style 覆蓋
+	inset-block-end: 24px;
+	display: grid;
+	place-items: center;
+
+	width: 50px;
+	height: 50px;
+	border-radius: 999px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background: #4a6b4c; // 品牌綠
+	color: #fff;
+	cursor: pointer;
+
+	box-shadow:
+		0 8px 20px rgba(0, 0, 0, 0.18),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+	transition:
+		transform .18s ease,
+		opacity .18s ease,
+		visibility .18s ease;
+
+	// 初始隱藏
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(12px);
+
+	&[data-visible="true"] {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	&:hover {
+		transform: translateY(-2px);
+	}
+
+	&:active {
+		transform: translateY(0);
+	}
+
+	&:focus-visible {
+		outline: 2px solid #cbb27a; // 金色（gold 金色）
+		outline-offset: 3px;
+	}
+
+	&__icon {
+		font-size: 22px;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	@media (max-width: 640px) {
+		width: 40px;
+		height: 40px;
+		inset-inline-end: 14px;
+		inset-block-end: 18px;
+	}
+}

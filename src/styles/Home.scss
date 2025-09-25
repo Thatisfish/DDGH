@@ -267,10 +267,15 @@
 		.panel {
 			position: absolute;
 			inset: 0;
+			display: block; // ✅ 強制 block，Link 也能撐滿
+			width: 100%; // ✅ 撐滿父層
+			height: 100%; // ✅ 撐滿父層
 			background-repeat: no-repeat;
 			background-size: cover;
 			cursor: pointer;
 			z-index: 1;
+			text-decoration: none; // ✅ 移除預設底線
+			color: inherit; // ✅ 保持繼承文字顏色
 
 			transition:
 				clip-path .6s cubic-bezier(.25, .46, .45, .94),

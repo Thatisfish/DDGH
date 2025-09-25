@@ -5,6 +5,7 @@ import TCM from '../images/Home/TCM.svg'
 import { useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router-dom'
 
 const home = () => {
 	const handleSubmit = (e) => {
@@ -109,22 +110,22 @@ const home = () => {
 				</div>
 
 				<div className="bridge_list">
-					<div className="bridge_item i1">
+					<Link className="bridge_item i1" to="/TCM">
 						<img src={TCM} alt="科學中藥" />
 						<h3>科學中藥</h3>
-					</div>
-					<div className="bridge_item i2">
+					</Link>
+					<Link className="bridge_item i2" to="/Decoction">
 						<img src={Decoction} alt="水藥代煎" />
 						<h3>水藥代煎</h3>
-					</div>
-					<div className="bridge_item i3">
+					</Link>
+					<Link className="bridge_item i3" to="/HerbalSlices">
 						<img src={Herb} alt="藥材飲片" />
 						<h3>藥材飲片</h3>
-					</div>
+					</Link>
 				</div>
 			</section>
 
-			<div className="aboutDD">
+			<div id="aboutDD" className="aboutDD">
 				<div className='about'>
 					<h2 className="about_title">關於日日</h2>
 					<div className="about_content">
@@ -164,16 +165,16 @@ const home = () => {
 
 			<div className='culture'>
 				<div className="split-banner">
-					<a className="panel left" href="#">
+					<Link className="panel left" to="/HerbalGallery">
 						<span className="label">本草藥閣</span>
-					</a>
-					<a className="panel right" href="#">
+					</Link>
+					<Link className="panel right" to="/WellnessFood">
 						<span className="label">養生食光</span>
-					</a>
+					</Link>
 				</div>
 			</div>
 
-			<div className='contact'>
+			<div id="contact" className='contact'>
 				<div className='info'>
 					<div className='tit'>
 						<p>日日蔘藥<span>- 科學中藥 - 水藥代煎 - 藥材飲片 - </span></p>

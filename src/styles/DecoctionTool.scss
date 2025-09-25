@@ -1,0 +1,26 @@
+.decoctionToolbg {
+	background: #F9F6F1;
+	font-family: "Noto Sans TC", sans-serif;
+
+	.decoctionTool {
+		padding: 30px 50px;
+
+		.de_title {
+			font-size: 30px;
+			font-weight: 600;
+			color: var(--main_fontc);
+		}
+
+		.ii {
+			display: flex;
+			justify-content: center;
+
+			img {
+				width: 500px;
+				height: 500px;
+			}
+		}
+
+
+	}
+}

@@ -1,3 +1,44 @@
+.herb {
+	&__hero {
+		background:
+			linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)),
+			url("../images/Home/culture_left.png");
+		background-size: cover;
+		background-position: center;
+		border-bottom: 10px solid #cbb27a;
+	}
+
+	&__hero-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: clamp(32px, 6vw, 72px) 6vw;
+	}
+
+	&__title {
+		font-size: clamp(28px, 4.5vw, 56px);
+		font-weight: 900;
+		color: #fff;
+		text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+		margin: 0 0 6px;
+	}
+
+	&__subtitle {
+		display: inline-block;
+		background: linear-gradient(90deg,
+				rgba(123, 94, 87, 0) 0%,
+				rgba(123, 94, 87, 0.75) 10%,
+				rgba(123, 94, 87, 0.75) 90%,
+				rgba(123, 94, 87, 0) 100%);
+		color: #fff;
+		padding: 6px 12px;
+		border-radius: 6px;
+		font-size: clamp(14px, 1.4vw, 18px);
+		line-height: 1.6;
+		width: 500px;
+		text-align: center;
+	}
+}
+
 /* src/styles/HerbalGallery.scss */
 .herb-gallery {
 	--wood: #8e5a3c;
@@ -23,6 +64,7 @@
 	&__hint {
 		color: #666;
 		margin: 0 0 24px;
+		font-size: 18px;
 	}
 
 	&__grid {
