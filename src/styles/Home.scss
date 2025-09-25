@@ -1,7 +1,7 @@
 .hero {
 	height: calc(100vh - 80px);
 	/* 佔滿整個螢幕高度 */
-	background: url("../images/Home/banner1920.webp") no-repeat center center;
+	background: url("../images/Home/banner1920.avif") no-repeat center center;
 	position: relative;
 
 	.hero-text {
@@ -34,7 +34,7 @@
 .bridge {
 	height: 40vh;
 	text-align: center;
-	background: url("../images/Home/bridge.svg");
+	background: url("../images/Home/bridge.avif");
 	display: flex;
 	align-items: center;
 
@@ -170,7 +170,7 @@
 				.img_top {
 					width: 35vw;
 					height: 300px;
-					background-image: url('../images/Home/about_top.png');
+					background-image: url('../images/Home/about_top.avif');
 					background-repeat: no-repeat;
 					background-position: center center;
 					background-size: cover;
@@ -180,7 +180,7 @@
 				.img_mid {
 					width: 35vw;
 					height: 300px;
-					background-image: url('../images/Home/about_mid.png');
+					background-image: url('../images/Home/about_mid.avif');
 					background-repeat: no-repeat;
 					background-position: center center;
 					background-size: cover;
@@ -190,7 +190,7 @@
 				.img_bot {
 					width: 35vw;
 					height: 300px;
-					background-image: url('../images/Home/about_bot.png');
+					background-image: url('../images/Home/about_bot.avif');
 					background-repeat: no-repeat;
 					background-position: center center;
 					background-size: cover;
@@ -334,7 +334,7 @@
 
 		/* 左側面板 */
 		.panel.left {
-			background: url(../images/Home/culture_left.png) center/cover;
+			background: url(../images/Home/culture_left.avif) center/cover;
 
 			/* 用當前切點 --ct / --cb（中縫各退 gap/2） */
 			clip-path: polygon(0 0,
@@ -361,7 +361,7 @@
 
 		/* 右側面板 */
 		.panel.right {
-			background: url(../images/Home/culture_right.png);
+			background: url(../images/Home/culture_right.avif);
 			background-size: cover;
 
 			clip-path: polygon(calc(var(--ct) + var(--gap)/2) 0,

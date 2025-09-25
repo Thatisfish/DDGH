@@ -23,7 +23,7 @@
 	&__hero {
 		background:
 			linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)),
-			url("../images/Home/culture_right.png"),
+			url("../images/Home/culture_right.avif"),
 			/* 可換成你的圖 */
 			var(--bg);
 		background-size: cover;
@@ -168,6 +168,8 @@
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: clamp(14px, 2vw, 24px);
+		align-items: stretch;
+		/* ★ 同列等高：讓每個格子拉滿列高（row height 列高） */
 
 		@media (max-width: 1100px) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -176,6 +178,11 @@
 		@media (max-width: 640px) {
 			grid-template-columns: 1fr;
 		}
+
+		/* 讓每張卡片撐滿所在格子高度 */
+		>.dish-card {
+			height: 100%;
+		}
 	}
 
 	.dish-card {
@@ -183,6 +190,8 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 300px;
+		height: 100%;
+		/* ★ 配合 grid 等高 */
 		border-radius: 18px;
 		background:
 			linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .02) 100%),
@@ -190,24 +199,36 @@
 		border: 1px solid #e7decb;
 		box-shadow: 0 10px 16px rgba(0, 0, 0, .06);
 		overflow: clip;
-		transition: transform .18s ease, box-shadow .2s ease;
+		transition: transform .18s ease, box-shadow .2s ease, z-index .2s ease;
+		/* ★ 加上 z-index 過渡 */
+
+		/* 內層可點擊容器：撐滿高度 */
+		&__click {
+			display: flex;
+			flex-direction: column;
+			min-height: 100%;
+			flex: 1 1 auto;
+			outline: none;
+		}
 
 		&:hover {
 			transform: translateY(-2px);
 			box-shadow: 0 16px 22px rgba(0, 0, 0, .1);
+			z-index: 1;
+			/* ★ 懸停時浮上，陰影不被隔壁卡片擋住 */
 		}
 
 		&__media {
 			height: 150px;
 			background: #ddd;
+			overflow: hidden;
+			border-radius: 8px; // 可選，讓圖片有點圓角更美觀
 
-			.ph {
+			img {
 				width: 100%;
 				height: 100%;
-				background:
-					linear-gradient(120deg, rgba(78, 93, 80, .18), rgba(240, 236, 228, .25)),
-					repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0 8px, rgba(0, 0, 0, 0) 8px 16px);
-				filter: saturate(.7) contrast(.95);
+				object-fit: cover; // 保持比例，填滿裁切
+				display: block;
 			}
 		}
 
@@ -254,6 +275,7 @@
 
 		&__tags {
 			margin-top: auto;
+			/* 把 tags（標籤）推到底 */
 			display: flex;
 			flex-wrap: wrap;
 			gap: 6px;
@@ -292,6 +314,7 @@
 			transform: translateY(0%);
 		}
 	}
+
 
 	/* Buttons */
 	.btn {

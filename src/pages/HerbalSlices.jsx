@@ -1,6 +1,6 @@
 import React from "react";
 import ServiceTemplate from "../components/ServiceTemplate";
-import heroImg from "../images/Home/about_bot.png"; // 自行換圖
+import heroImg from "../images/Home/about_bot.avif"; // 自行換圖
 
 const HerbSlices = () => {
 	const features = [

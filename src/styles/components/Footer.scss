@@ -39,7 +39,7 @@ footer {
 				a {
 					&:hover {
 						color: #5A4632; // 例如你的品牌金色
-						font-weight: 700;
+						font-weight: 900;
 
 						span {
 							color: #A8894A;
@@ -91,10 +91,21 @@ footer {
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 600;
+								transition: color .2s ease;
+							}
+
+							// hover 效果
+							&:hover {
+								a {
+									color: #5A4632;
+									font-weight: 900;
+								}
+
+								span {
+									color: #A8894A;
+								}
 							}
 						}
-
-
 					}
 				}
 			}

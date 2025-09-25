@@ -1,6 +1,6 @@
 import React from "react";
 import ServiceTemplate from "../components/ServiceTemplate";
-import heroImg from "../images/Home/about_top.png"; // 自行換圖
+import heroImg from "../images/Home/about_top.avif"; // 自行換圖
 
 const ScienceTCM = () => {
 	const features = [

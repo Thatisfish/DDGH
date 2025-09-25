@@ -15,27 +15,28 @@ const CATEGORIES = [
 ];
 
 const DISHES = [
-	{ id: "shishen", name: "四神湯", category: "qi", herbs: ["茯苓", "淮山", "芡實", "蓮子"], tags: ["湯品"] },
-	{ id: "huangqi-chicken", name: "黃耆雞湯", category: "qi", herbs: ["黃耆", "紅棗"], tags: ["湯品"] },
-	{ id: "danggui-duck", name: "當歸鴨", category: "blood", herbs: ["當歸", "紅棗", "枸杞"], tags: ["湯品", "冬季"] },
-	{ id: "siwu-chicken", name: "四物雞湯", category: "blood", herbs: ["當歸", "川芎", "熟地", "白芍"], tags: ["湯品", "女性調理"] },
-	{ id: "duzhong-kidney", name: "杜仲腰花", category: "kidney", herbs: ["杜仲"], tags: ["熱炒"] },
-	{ id: "lamb-pot", name: "枸杞羊肉爐", category: "kidney", herbs: ["枸杞", "當歸", "黨參"], tags: ["火鍋", "冬季"] },
-	{ id: "baihe-lotus", name: "百合蓮子湯", category: "lung", herbs: ["百合", "蓮子"], tags: ["湯品"] },
-	{ id: "white-fungus", name: "銀耳蓮子湯", category: "lung", herbs: ["銀耳", "蓮子", "紅棗"], tags: ["甜品"] },
-	{ id: "longan-redtea", name: "桂圓紅棗茶", category: "calm", herbs: ["桂圓", "紅棗", "枸杞"], tags: ["茶飲"] },
-	{ id: "goji-osmanthus", name: "枸杞桂花凍", category: "calm", herbs: ["枸杞", "桂花"], tags: ["甜品"] },
-	{ id: "longan-rice", name: "桂圓紫米粥", category: "calm", herbs: ["桂圓", "紫米"], tags: ["粥品"] },
-	{ id: "yiren-rib", name: "薏仁排骨湯", category: "damp", herbs: ["薏仁", "茯苓", "陳皮"], tags: ["湯品", "夏季"] },
-	{ id: "longan-porridge", name: "龍眼紅棗粥", category: "calm", herbs: ["龍眼", "紅棗"], tags: ["粥品"] },
-	{ id: "suanzaoren-porridge", name: "酸棗仁粥", category: "calm", herbs: ["酸棗仁"], tags: ["粥品", "安神"] },
-	{ id: "ginseng-chicken", name: "人參雞湯", category: "qi", herbs: ["人參", "黃耆"], tags: ["湯品"] },
-	{ id: "dangshen-goji", name: "黨參枸杞湯", category: "qi", herbs: ["黨參", "枸杞", "淮山"], tags: ["湯品"] },
-	{ id: "heshouwu-chicken", name: "何首烏雞湯", category: "kidney", herbs: ["何首烏", "枸杞", "紅棗"], tags: ["湯品"] },
-	{ id: "lotus-mung", name: "蓮子綠豆湯", category: "clear", herbs: ["蓮子", "綠豆"], tags: ["甜品", "夏季"] },
-	{ id: "chrys-goji", name: "菊花枸杞茶", category: "clear", herbs: ["菊花", "枸杞"], tags: ["茶飲"] },
-	{ id: "chuanbei-pear", name: "川貝燉梨", category: "lung", herbs: ["川貝", "雪梨"], tags: ["甜品"] },
-	{ id: "almond-lily", name: "杏仁百合湯", category: "lung", herbs: ["南杏", "北杏", "百合"], tags: ["甜品"] }
+	{ id: "mulledwine-herbal", name: "熱紅酒", image: "/dishes/mulledwine-herbal.avif", category: "warm", herbs: ["紅棗", "桂圓", "枸杞", "肉桂", "丁香", "陳皮"], tags: ["飲品"] },
+	{ id: "shishen", name: "四神湯", image: "/dishes/shishen.avif", category: "qi", herbs: ["茯苓", "淮山", "芡實", "蓮子"], tags: ["湯品"] },
+	{ id: "huangqi-chicken", name: "黃耆雞湯", image: "/dishes/huangqi-chicken.avif", category: "qi", herbs: ["黃耆", "紅棗"], tags: ["湯品"] },
+	{ id: "danggui-duck", name: "當歸鴨", image: "/dishes/danggui-duck.avif", category: "blood", herbs: ["當歸", "紅棗", "枸杞"], tags: ["湯品", "冬季"] },
+	{ id: "siwu-chicken", name: "四物雞湯", image: "/dishes/siwu-chicken.avif", category: "blood", herbs: ["當歸", "川芎", "熟地", "白芍"], tags: ["湯品", "女性調理"] },
+	{ id: "duzhong-kidney", name: "杜仲腰花", image: "/dishes/duzhong-kidney.avif", category: "kidney", herbs: ["杜仲"], tags: ["熱炒"] },
+	{ id: "lamb-pot", name: "枸杞羊肉爐", image: "/dishes/lamb-pot.avif", category: "kidney", herbs: ["枸杞", "當歸", "黨參"], tags: ["火鍋", "冬季"] },
+	{ id: "baihe-lotus", name: "百合蓮子湯", image: "/dishes/baihe-lotus.avif", category: "lung", herbs: ["百合", "蓮子"], tags: ["湯品", "秋季"] },
+	{ id: "white-fungus", name: "銀耳蓮子湯", image: "/dishes/white-fungus.avif", category: "lung", herbs: ["銀耳", "蓮子", "紅棗"], tags: ["甜品", "秋季"] },
+	{ id: "longan-redtea", name: "桂圓紅棗茶", image: "/dishes/longan-redtea.avif", category: "calm", herbs: ["桂圓", "紅棗", "枸杞"], tags: ["茶飲"] },
+	{ id: "goji-osmanthus", name: "枸杞桂花凍", image: "/dishes/goji-osmanthus.avif", category: "calm", herbs: ["枸杞", "桂花"], tags: ["甜品"] },
+	{ id: "longan-rice", name: "桂圓紫米粥", image: "/dishes/longan-rice.avif", category: "calm", herbs: ["桂圓", "紫米"], tags: ["粥品"] },
+	{ id: "yiren-rib", name: "薏仁排骨湯", image: "/dishes/yiren-rib.avif", category: "damp", herbs: ["薏仁", "茯苓", "陳皮"], tags: ["湯品", "夏季"] },
+	{ id: "longan-porridge", name: "龍眼紅棗粥", image: "/dishes/longan-porridge.avif", category: "calm", herbs: ["龍眼", "紅棗"], tags: ["粥品"] },
+	{ id: "suanzaoren-porridge", name: "酸棗仁粥", image: "/dishes/suanzaoren-porridge.avif", category: "calm", herbs: ["酸棗仁"], tags: ["粥品", "安神"] },
+	{ id: "ginseng-chicken", name: "人參雞湯", image: "/dishes/ginseng-chicken.avif", category: "qi", herbs: ["人參", "黃耆"], tags: ["湯品"] },
+	{ id: "dangshen-goji", name: "黨參枸杞湯", image: "/dishes/dangshen-goji.avif", category: "qi", herbs: ["黨參", "枸杞", "淮山"], tags: ["湯品"] },
+	{ id: "heshouwu-chicken", name: "何首烏雞湯", image: "/dishes/heshouwu-chicken.avif", category: "kidney", herbs: ["何首烏", "枸杞", "紅棗"], tags: ["湯品"] },
+	{ id: "lotus-mung", name: "蓮子綠豆湯", image: "/dishes/lotus-mung.avif", category: "clear", herbs: ["蓮子", "綠豆"], tags: ["甜品", "夏季"] },
+	{ id: "chrys-goji", name: "菊花枸杞茶", image: "/dishes/chrys-goji.avif", category: "clear", herbs: ["菊花", "枸杞"], tags: ["茶飲"] },
+	{ id: "chuanbei-pear", name: "川貝燉梨", image: "/dishes/chuanbei-pear.avif", category: "lung", herbs: ["川貝", "雪梨"], tags: ["甜品", "秋季"] },
+	{ id: "almond-lily", name: "杏仁百合湯", image: "/dishes/almond-lily.avif", category: "lung", herbs: ["南杏", "北杏", "百合"], tags: ["甜品"] }
 ];
 
 /* 食譜資料 */
@@ -106,6 +107,29 @@ const RECIPES = {
 			"以冰糖調甜度。"
 		],
 		tips: "想要“膠質感”可延長熬煮並補水。"
+	},
+	"mulledwine-herbal": {
+		serving: "2–3 人份",
+		time: "30–40 分鐘",
+		ingredients: [
+			"紅酒 750ml",
+			"紅棗 6–8 顆（去核）",
+			"桂圓 8–10 顆",
+			"枸杞 15g",
+			"肉桂棒 1–2 根",
+			"丁香 3–4 粒",
+			"陳皮 1小片",
+			"柳橙片 3–4片",
+			"冰糖或蜂蜜 適量"
+		],
+		steps: [
+			"紅棗去核、桂圓與枸杞略沖洗；陳皮泡軟備用。",
+			"將紅酒倒入鍋中，小火加熱（避免沸騰）。",
+			"放入紅棗、桂圓、枸杞、肉桂、丁香與陳皮，持續小火加熱 20–30 分鐘。",
+			"加入柳橙片提味，依個人口感調整甜度（冰糖或蜂蜜）。",
+			"濾出藥材與香料後即可享用。"
+		],
+		tips: "全程保持小火避免酒精揮發；此為文化飲食示例，僅供日常養生參考，非醫療用途。"
 	}
 };
 
@@ -233,9 +257,15 @@ export default function WellnessCuisine() {
 						<button
 							key={c.key}
 							className={`tab ${active === c.key ? "is-active" : ""}`}
-							onClick={() => setActive(c.key)}
+							onClick={() => setActive(prev => (prev === c.key && c.key !== "all" ? "all" : c.key))}
+							onKeyDown={(e) => {
+								if (e.key === "Enter" || e.key === " ") {
+									setActive(prev => (prev === c.key && c.key !== "all" ? "all" : c.key));
+								}
+							}}
 							type="button"
 							aria-pressed={active === c.key}
+							aria-label={active === c.key && c.key !== "all" ? `${c.label}（再次點擊可切回全部）` : c.label}
 						>
 							{c.label}
 						</button>
@@ -265,7 +295,7 @@ export default function WellnessCuisine() {
 							key={t}
 							type="button"
 							className={`chip ${onlyTag === t ? "is-active" : ""}`}
-							onClick={() => setOnlyTag(t)}
+							onClick={() => setOnlyTag(onlyTag === t ? "" : t)}
 						>
 							{t}
 						</button>
@@ -284,8 +314,13 @@ export default function WellnessCuisine() {
 							onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openRecipe(d)}
 							aria-label={`查看 ${d.name} 的食譜`}
 						>
-							<div className="dish-card__media" aria-hidden="true">
-								<div className="ph" />
+							<div className="dish-card__media">
+								<img
+									src={d.image}
+									alt={d.name}
+									loading="lazy"
+									decoding="async"
+								/>
 							</div>
 							<div className="dish-card__body">
 								<h3 className="dish-card__title">{d.name}</h3>
@@ -325,7 +360,13 @@ export default function WellnessCuisine() {
 					<h2>本季主打：潤肺養陰</h2>
 					<p>入秋易燥，推薦「川貝燉梨、銀耳蓮子羹、百合蓮子湯」。</p>
 					<div className="season__cta">
-						<button type="button" className="btn btn--primary">查看秋季推薦</button>
+						<button
+							type="button"
+							className="btn btn--primary"
+							onClick={() => setOnlyTag("秋季")}
+						>
+							查看秋季推薦
+						</button>
 						<button type="button" className="btn btn--ghost">下載食譜（PDF 可攜式文件）</button>
 					</div>
 				</div>

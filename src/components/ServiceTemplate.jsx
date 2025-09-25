@@ -25,7 +25,7 @@ const ServiceTemplate = ({ hero, title, subtitle, features = [], steps = [], faq
 					<h2>服務說明</h2>
 					<p>
 						我們以嚴謹流程把關品質，從藥材來源、保存到出貨，全程記錄；並以「專業、透明、穩定」為核心，
-						協助診所（clinic，診療所）、藥局（pharmacy，藥房）與一般大眾理解中藥（Traditional Chinese Medicine，傳統中醫藥）的現代化應用。
+						協助診所、藥局與一般大眾理解中藥的現代化應用。
 					</p>
 					<ul className="ser__bullets">
 						{features.map((f, i) => (

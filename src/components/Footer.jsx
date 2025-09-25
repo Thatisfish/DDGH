@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/components/Footer.scss'
 import { Link } from 'react-router-dom'
 
@@ -8,9 +7,9 @@ const footer = () => {
 			<nav>
 				<div className='at'>
 					<div className='About'>
-						<Link to="/#" className='title'>關於日日</Link>
-						<Link to="/#" className='title'>聯絡我們</Link>
-						<Link to="/#" className='title'>會員專區</Link>
+						<Link to="/#aboutDD" className='title'>關於日日</Link>
+						<Link to="/#contact" className='title'>聯絡我們</Link>
+						<Link to="/MemberArea" className='title'>會員專區</Link>
 					</div>
 
 					<div className='service'>

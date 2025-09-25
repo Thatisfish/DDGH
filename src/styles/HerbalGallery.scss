@@ -2,7 +2,7 @@
 	&__hero {
 		background:
 			linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)),
-			url("../images/Home/culture_left.png");
+			url("../images/Home/culture_left.avif");
 		background-size: cover;
 		background-position: center;
 		border-bottom: 10px solid #cbb27a;
@@ -502,7 +502,7 @@
 		overflow: hidden;
 		box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
 		display: grid;
-		grid-template-rows: auto 1fr;
+		grid-template-rows: auto minmax(0, 1fr);
 	}
 
 	&__close {
@@ -525,12 +525,21 @@
 
 	&__cover {
 		width: 100%;
-		height: clamp(180px, 36vh, 360px);
+		aspect-ratio: 1 / 1;
+		/* 長寬比 */
 		object-fit: cover;
+		/* 填滿裁切 */
+		display: block;
+
+		/* 避免把整個面板高度吃光：加上上限（cap，上限值）*/
+		max-height: min(56vh, 560px);
+		/* 如果被 max-height 限制而寬度變小，置中一下 */
+		margin: 0 auto;
 	}
 
 	&__body {
 		padding: 18px 22px 24px;
+		min-height: 0;
 		overflow: auto;
 
 		&::-webkit-scrollbar {

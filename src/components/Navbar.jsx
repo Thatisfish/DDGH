@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import '../styles/components/Navbar.scss'
-import Logo from '../images/logo.png'
+import Logo from '../images/logo.avif'
 
 const Navbar = () => {
 	// 下拉開合（產品 / 文化）
@@ -35,7 +35,9 @@ const Navbar = () => {
 		<header className="topbar">
 			<nav className="navbar">
 				<div className="Logo">
-					<img src={Logo} alt="LOGO" />
+					<Link to="/#">
+						<img src={Logo} alt="LOGO" />
+					</Link>
 				</div>
 
 				<ul className="menu">
