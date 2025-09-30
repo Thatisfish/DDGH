@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../styles/MemberArea.scss";
 
 const Login = () => {
-	// 狀態
-	const [account, setAccount] = useState("");
-	const [password, setPassword] = useState("");
+	// 狀態（state 狀態）— 預設帳號帶入，密碼留空
+	const [account, setAccount] = useState("Admin123");
+	const [password, setPassword] = useState("Admin123");
 	const [error, setError] = useState("");
 	const [showModal, setShowModal] = useState(false);
 
@@ -18,7 +18,11 @@ const Login = () => {
 		const validUser = "Admin123";
 		const validPass = "Admin123";
 
-		if (account === validUser && password === validPass) {
+		// 去除兩端空白（trim 修剪）
+		const acc = account.trim();
+		const pwd = password.trim();
+
+		if (acc === validUser && pwd === validPass) {
 			setError("");
 			navigate("/Dashboard"); // 登入成功 → 後台（Dashboard 控制台）
 		} else {
@@ -35,7 +39,7 @@ const Login = () => {
 
 	const goToContact = () => {
 		setShowModal(false);
-		navigate("/#contact"); // 導向聯絡我們頁
+		navigate("/#contact"); // 導向聯絡我們區塊
 	};
 
 	return (
@@ -44,7 +48,7 @@ const Login = () => {
 				<div className="login__box">
 					<h2>會員登入</h2>
 
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} noValidate>
 						<div className="form__group">
 							<label htmlFor="account">帳號</label>
 							<input
@@ -55,6 +59,7 @@ const Login = () => {
 								placeholder="請輸入帳號"
 								autoComplete="username"
 								inputMode="text"
+								required
 							/>
 						</div>
 
@@ -67,10 +72,12 @@ const Login = () => {
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="請輸入密碼"
 								autoComplete="current-password"
+								required
+								minLength={6}
 							/>
 						</div>
 
-						{error && <p className="error">{error}</p>}
+						{error && <p className="error" role="alert">{error}</p>}
 
 						<button type="submit" className="btn">登入</button>
 					</form>
